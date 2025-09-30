@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моє Портфоліо</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #101010;
+            --card-bg: #1a1a1a;
+            --primary-orange: #ff8c00;
+            --primary-yellow: #ffd700;
+            --text-light: #f0f0f0;
+            --text-dark: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 50px 25px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: -webkit-linear-gradient(45deg, var(--primary-orange), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2a2a2a;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.6rem;
+            color: var(--primary-yellow);
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-weight: 600;
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 8px;
+            background-image: linear-gradient(45deg, var(--primary-orange), var(--primary-yellow));
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay:target {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .modal-overlay:target .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            line-height: 1;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .modal-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: var(--primary-orange);
+        }
+
+        .modal-content .short-desc {
+            font-size: 1.2rem;
+            color: var(--primary-yellow);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .modal-content .full-desc p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .modal-gallery img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="top"></div>
+    <div class="container">
+        <header>
+            <h1>Мої Проекти</h1>
+            <p>Огляд моїх останніх робіт, де я поєдную креативність та технології для створення унікальних рішень.</p>
+        </header>
+
+        <main class="portfolio-grid">
+            <div class="project-card">
+                <img src="project1.jpg" alt="Проект 1" class="card-image">
+                <div class="card-content">
+                    <h3>Назва проекту 1</h3>
+                    <p>Дуже короткий опис, що розкриває головну суть та ідею цього дивовижного проекту.</p>
+                    <a href="#modal1" class="view-btn">Детальніше</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="project2.jpg" alt="Проект 2" class="card-image">
+                <div class="card-content">
+                    <h3>Назва проекту 2</h3>
+                    <p>Дуже короткий опис, що розкриває головну суть та ідею цього дивовижного проекту.</p>
+                    <a href="#modal2" class="view-btn">Детальніше</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="project3.jpg" alt="Проект 3" class="card-image">
+                <div class="card-content">
+                    <h3>Назва проекту 3</h3>
+                    <p>Дуже короткий опис, що розкриває головну суть та ідею цього дивовижного проекту.</p>
+                    <a href="#modal3" class="view-btn">Детальніше</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="modal1" class="modal-overlay">
+        <div class="modal-container">
+            <a href="#top" class="modal-close">&times;</a>
+            <div class="modal-header">
+                <img src="project1.jpg" alt="Головне зображення проекту 1">
+            </div>
+            <div class="modal-content">
+                <h2>Назва проекту 1</h2>
+                <p class="short-desc">Розширений короткий опис, який був на картці.</p>
+                <div class="full-desc">
+                    <p>Тут розміщується повний, детальний опис вашого проекту. Ви можете розповісти про цілі, які перед вами стояли, про виклики, з якими ви зіткнулися, та про те, як ви їх подолали. Опишіть використані технології та ваш особистий внесок у реалізацію.</p>
+                    <p>Другий абзац може містити інформацію про результати проекту, його вплив або відгуки клієнтів. Важливо показати не тільки процес, а й цінність вашої роботи.</p>
+                </div>
+                <div class="modal-gallery">
+                    <img src="project1-sub1.jpg" alt="Додаткове фото">
+                    <img src="project1-sub2.jpg" alt="Додаткове фото">
+                    <img src="project1-sub3.jpg" alt="Додаткове фото">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal-overlay">
+        <div class="modal-container">
+            <a href="#top" class="modal-close">&times;</a>
+            <div class="modal-header">
+                <img src="project2.jpg" alt="Головне зображення проекту 2">
+            </div>
+            <div class="modal-content">
+                <h2>Назва проекту 2</h2>
+                <p class="short-desc">Розширений короткий опис, який був на картці.</p>
+                <div class="full-desc">
+                    <p>Тут розміщується повний, детальний опис вашого проекту. Ви можете розповісти про цілі, які перед вами стояли, про виклики, з якими ви зіткнулися, та про те, як ви їх подолали. Опишіть використані технології та ваш особистий внесок у реалізацію.</p>
+                </div>
+                <div class="modal-gallery">
+                    <img src="project2-sub1.jpg" alt="Додаткове фото">
+                    <img src="project2-sub2.jpg" alt="Додаткове фото">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal3" class="modal-overlay">
+        <div class="modal-container">
+            <a href="#top" class="modal-close">&times;</a>
+            <div class="modal-header">
+                <img src="project3.jpg" alt="Головне зображення проекту 3">
+            </div>
+            <div class="modal-content">
+                <h2>Назва проекту 3</h2>
+                <p class="short-desc">Розширений короткий опис, який був на картці.</p>
+                <div class="full-desc">
+                    <p>Тут розміщується повний, детальний опис вашого проекту. Ви можете розповісти про цілі, які перед вами стояли, про виклики, з якими ви зіткнулися, та про те, як ви їх подолали. Опишіть використані технології та ваш особистий внесок у реалізацію.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
