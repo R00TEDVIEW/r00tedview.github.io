@@ -15,6 +15,7 @@
             --primary-yellow: #ffd700;
             --text-light: #f0f0f0;
             --text-dark: #cccccc;
+            --border-color: #2a2a2a;
         }
 
         * {
@@ -45,6 +46,43 @@
             margin-bottom: 80px;
         }
 
+        .bio-section {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .bio-section h2 {
+            font-size: 1.5rem;
+            color: var(--primary-yellow);
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 2px solid var(--primary-orange);
+            padding-bottom: 10px;
+        }
+        
+        .bio-section ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .bio-section ul li {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .bio-section ul li strong {
+            color: var(--text-light);
+            min-width: 80px;
+            display: inline-block;
+        }
+
         header h1 {
             font-size: 3.5rem;
             font-weight: 700;
@@ -52,13 +90,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .portfolio-grid {
@@ -73,7 +104,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #2a2a2a;
+            border: 1px solid var(--border-color);
         }
 
         .project-card:hover {
@@ -194,6 +225,8 @@
             color: var(--primary-yellow);
             margin-bottom: 30px;
             font-style: italic;
+            border-left: 4px solid var(--primary-orange);
+            padding-left: 15px;
         }
 
         .modal-content .full-desc p {
@@ -202,7 +235,41 @@
             color: var(--text-dark);
             margin-bottom: 20px;
         }
+
+        .modal-content .full-desc ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content .full-desc ul li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .modal-content .full-desc ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
         
+        .modal-content .full-desc ul ul {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 25px;
+        }
+
+        .modal-content .full-desc ul ul li::before {
+            content: '›';
+            color: var(--primary-yellow);
+        }
+
         .modal-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -214,12 +281,14 @@
             width: 100%;
             border-radius: 8px;
             object-fit: cover;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, border 0.2s ease;
             cursor: pointer;
+            border: 2px solid transparent;
         }
 
         .modal-gallery img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            border-color: var(--primary-orange);
         }
 
         /* Стили для модального окна с увеличенным изображением */
@@ -272,13 +341,14 @@
     <div id="top"></div>
     <div class="container">
         <header>
-            <p>About ROOT: 
-            <ul>
-                <li>Name: root</li>
-                <li>Age: 15</li>
-                <li>Country: Ukraine</li>
-            </ul>
-            </p>
+            <div class="bio-section">
+                <h2>About ROOT</h2>
+                <ul>
+                    <li><strong>Name:</strong> root</li>
+                    <li><strong>Age:</strong> 15</li>
+                    <li><strong>Country:</strong> Ukraine</li>
+                </ul>
+            </div>
             <h1>Проекти</h1>
         </header>
 
@@ -322,7 +392,7 @@
                 <h2>SCR network</h2>
                 <p class="short-desc">Проект був розроблений як система вкладеннь, з дуже розвинутою панелю андміністратора.<br>Призначення системи: NONE</p>
                 <div class="full-desc">
-                    <p>У проєкті реалізовано:
+                    <p>У проєкті реалізовано:</p>
                     <ul>
                         <li>реєстрацію та вхід</li>
                         <li>профіль</li>
@@ -331,7 +401,6 @@
                         <li>вкладення</li>
                         <li>у профілі відображається графік усіх витрат, поповнень і переказів</li>
                     </ul>
-                    </p>
                     <p>Кожен користувач має власний гаманець, на який можна здійснювати перекази, поповнення та покупки всередині системи.</p>
                     <p>Також у користувачів була персональна сторінка (зовнішній профіль), де відображалась інформація від дати реєстрації до ID. Усі дані можна приховати або показати в налаштуваннях.</p>
                     <p>З адміністративної панелі доступне повне керування користувачами, продуктами, доступом, сторінками. Є контроль абсолютно всього, крім балансу.</p>
@@ -360,11 +429,8 @@
             <div class="full-desc">
                 <p>view2u - це додаток, який я постійно розвиваю. Наразі випущено дві версії, а незабаром вийде оновлення 0.3.0.</p>
                 <p>Система є повністю закритою - доступ можливий лише за запрошувальним посиланням. На головному сервері опублікована і успішно працює версія 0.2.0, яка включає такі функції:</p>
-                <br>
-                <br>
                 <ul>
                     <li>Збір базових даних:
-                        <br>
                         <ul>
                             <li>Фото та відео - з фронтальної та задньої камер;</li>
                             <li>Форми - підтримка всіх типів input із можливістю потокової передачі даних;</li>
@@ -372,16 +438,12 @@
                             <li>Базові дані - отримуються незалежно від дозволів: IP-адреса, часовий пояс, розкладка клавіатури, розміри екрана, інформація про пристрій, інформація про браузер.</li>
                         </ul>
                     </li>
-                    <br>
-                    <br>
                     <li>Сповіщення через Telegram-бот при надходженні даних;</li>
                     <li>ШІ на основі моделі GPT-4o для генерації сторінок збору даних;</li>
                     <li>Публікація сторінки за окремим посиланням;</li>
                     <li>Зручний перегляд отриманих даних;</li>
                     <li>Зручне видалення даних із системи.</li>
                 </ul>
-                <br>
-                <br>
                 <p>У версії 0.3.0 буде додано можливість отримання сесії Telegram. Сторінка матиме персоналізований вигляд, як і інші функції. Отриману сесію можна буде використовувати безпосередньо на сайті безпечно, без сповіщень власнику. Це дозволить переглядати повідомлення, керувати ними та іншими сесіями на цьому акаунті.</p>
                 <p>На скріншотах нижче представлена версія 0.2.0, оскільки версія 0.3.0 ще в розробці (з повним редизайном системи).</p>
                 <div class="modal-gallery">
@@ -417,6 +479,11 @@
 
     <script>
         // Хтось читає мій код? Можливо краще наповнення сторінки почитаєш 😁
+
+
+
+
+        
         const imageModal = document.getElementById('imageModal');
         const imageModalContent = document.querySelector('.image-modal-content');
         const imageModalClose = document.querySelector('.image-modal-close');
@@ -430,7 +497,14 @@
 
 
 
+
         
+
+
+
+        
+
+
 
         
         // Астанавітесь! Що ти тут робиш????
@@ -440,8 +514,23 @@
 
 
 
+        
+
+
+
+
+
 
         
+
+
+
+
+
+
+
+
+
 
 
 
@@ -456,6 +545,7 @@
 
 
 
+        
 
 
 
@@ -466,12 +556,39 @@
 
 
 
+
+
+        
+        
+
+
+
+
+
+
+        
 
         // Я серйозно...
 
 
 
 
+
+        
+
+
+
+
+
+
+
+
+
+        
+
+
+
+        
 
 
 
@@ -490,7 +607,6 @@
 
 
 
-
         
 
 
@@ -498,15 +614,27 @@
 
 
 
+
+
+
+        
         // Та все, тут нічого немає повертайся назад на сторінку 😎
 
 
 
+
+
+
+
+
+
+
+
         
 
 
 
-        
+
 
 
 
@@ -526,6 +654,7 @@
 
         
 
+        
         // Все? Дочитли? Ну тоді пока 😒
     </script>
 
