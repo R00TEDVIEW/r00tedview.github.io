@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моє Портфоліо</title>
+    <title>root PROjects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -272,8 +272,14 @@
     <div id="top"></div>
     <div class="container">
         <header>
+            <p>About ROOT: 
+            <ul>
+                <li>Name: root</li>
+                <li>Age: 15</li>
+                <li>Country: Ukraine</li>
+            </ul>
+            </p>
             <h1>Проекти</h1>
-            <p>НАРАЗІ ЖОДЕН З ЦИХ ДОДАТКІВ НЕ ЗАВЕРШЕНИЙ ДО ПЕРШОЇ СТАБІЛЬНОЇ ВЕРСІЇ, ВОНИ НЕСУТЬ ЧИСТО ДЕМОНСТРАЦІЙНИЙ ХАРАКТЕР</p>
         </header>
 
         <main class="portfolio-grid">
@@ -332,11 +338,11 @@
                     <p>Нижче наведено скріншоти системи (сторінка користувача).</p>
                 </div>
                 <div class="modal-gallery">
-                    <img src="image1.png" alt="photo 4">
-                    <img src="image5.png" alt="photo 4">
-                    <img src="image2.png" alt="photo 1">
-                    <img src="image3.png" alt="photo 2">
-                    <img src="image4.png" alt="photo 3">
+                    <img src="image1.png" alt="photo 1">
+                    <img src="image5.png" alt="photo 2">
+                    <img src="image2.png" alt="photo 3">
+                    <img src="image3.png" alt="photo 4">
+                    <img src="image4.png" alt="photo 5">
                 </div>
             </div>
         </div>
@@ -404,20 +410,43 @@
         </div>
     </div>
 
-    <!-- Модальное окно для увеличенного изображения -->
     <div id="imageModal" class="image-modal">
         <a href="#" class="image-modal-close">&times;</a>
         <img src="" alt="Увеличенное изображение" class="image-modal-content">
     </div>
 
     <script>
-        // Получаем элементы модального окна для изображений
+        // Хтось читає мій код? Можливо краще наповнення сторінки почитаєш 😁
         const imageModal = document.getElementById('imageModal');
         const imageModalContent = document.querySelector('.image-modal-content');
         const imageModalClose = document.querySelector('.image-modal-close');
         const galleryImages = document.querySelectorAll('.modal-gallery img');
 
-        // Добавляем обработчик клика для каждого изображения в галерее
+
+
+
+
+
+
+
+
+        
+
+        
+        // Астанавітесь! Що ти тут робиш????
+
+
+
+
+
+
+
+        
+
+
+
+
+        
         galleryImages.forEach(img => {
             img.addEventListener('click', () => {
                 imageModalContent.src = img.src;
@@ -425,18 +454,79 @@
             });
         });
 
-        // Закрытие модального окна при клике на крестик
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Я серйозно...
+
+
+
+
+
+
+
+
+
+
+        
         imageModalClose.addEventListener('click', (e) => {
             e.preventDefault();
             imageModal.classList.remove('active');
         });
 
-        // Закрытие модального окна при клике на фон
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+        // Та все, тут нічого немає повертайся назад на сторінку 😎
+
+
+
+        
+
+
+
+        
+
+
+
+
+        
         imageModal.addEventListener('click', (e) => {
             if (e.target === imageModal) {
                 imageModal.classList.remove('active');
             }
         });
+
+
+
+
+
+
+
+        
+
+        // Все? Дочитли? Ну тоді пока 😒
     </script>
 
 </body>
